@@ -1,0 +1,23 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: proxy
+#正产情况下会有多个注册中心，每个注册中心都会默认向其他注册中心上注册自己
+#如果是单个注册中心，可以关闭向其他注册中心注册的功能
+eureka:
+  client:
+    service-url:
+      defaultZone: http://yanweiling:123456@localhost:8761/eureka
+    #以下两个属性，默认就是true
+#    register-with-eureka: true
+#    fetch-registry: true
+
+
+#设置路由规则
+zuul:
+  routes:
+    userApi:
+      path: /home/**
+      stripPrefix: false
+      serviceId: user

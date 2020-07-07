@@ -1,0 +1,30 @@
+
+server:
+  port: 8761
+
+spring:
+  application:
+    name: registry
+
+#正产情况下会有多个注册中心，每个注册中心都会默认向其他注册中心上注册自己
+#如果是单个注册中心，可以关闭向其他注册中心注册的功能
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false #不在查找现有的注册中心
+    service-url:
+      defaultZone: http://yanweiling:123456@localhost:${server.port}/eureka
+
+
+
+#避免非法服务注册
+security:
+  basic:
+    enabled: true
+  user:
+    name: yanweiling
+    password: 123456
+    role: SUPERUSER
+
